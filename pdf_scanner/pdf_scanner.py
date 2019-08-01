@@ -42,7 +42,7 @@ for file in os.listdir(filePath):
             page_text = pageObj.extractText()
             all_file_text += page_text
             #print(all_file_text)
-
+        all_file_text = all_file_text.lower()
         # Searches file text for keywords then routes/copies files and logs result
         if all_file_text.find("if eligible") > 0:
             shutil.copy(full_file_path, outfilePath_not)
@@ -50,6 +50,9 @@ for file in os.listdir(filePath):
         elif all_file_text.find("not eligible") > 0:
             shutil.copy(full_file_path, outfilePath_not)
             get_log_info(file, 'Ineligible', "not eligible")
+        elif all_file_text.find("no further research") > 0:
+            shutil.copy(full_file_path, outfilePath_not)
+            get_log_info(file, 'Ineligible', 'no further research')
         elif all_file_text.find("ineligible") > 0:
             shutil.copy(full_file_path, outfilePath_not)
             get_log_info(file, 'Ineligible', "ineligible")
